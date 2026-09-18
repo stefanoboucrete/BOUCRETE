@@ -13,3 +13,9 @@ Implementado: inicio, categorías, sobre diseño, profesionales, Lunch & Learn, 
 - Retirar bloque de revisión y avisos cuando estén completos los pendientes.
 
 No se usa el contenido de ejemplo de otros estudios incluido en el manual como producto de Boucrete. No se publicó el Google Form: continúa pendiente de autorización de acceso.
+
+## Referencias para continuar
+- Concreteworks: https://concreteworks.com/ — proyectos y fabricación a medida.
+- Lumacast: https://lumacast.com/ — colecciones, acabados y presentación de producto.
+- Referencias aportadas por el usuario; conservar identidad y fotografías propias de Boucrete.
+- 17 de septiembre: se retomó la versión existente, se mejoró legibilidad y adaptación móvil y se preparó la revisión privada.
