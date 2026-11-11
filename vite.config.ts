@@ -1,5 +1,5 @@
 import { sites } from '@openai/sites-vite-plugin';
-import tailwindcss from '@tailwindcss/postcss';
+import tailwindcss from '@tailwindcss/vite';
 import vinext from 'vinext';
 import { defineConfig } from 'vite';
 import hostingConfig from './.openai/hosting.json';
@@ -41,21 +41,24 @@ export default defineConfig(async () => {
   process.env.WRANGLER_LOG_PATH ??= '.wrangler/logs';
   process.env.MINIFLARE_REGISTRY_PATH ??= '.wrangler/registry';
 
-  // Wrangler snapshots its log path while the Cloudflare plugin is imported.
-  const { cloudflare } = await import('@cloudflare/vite-plugin');
+  // Use Vercel's Nitro adapter for deployments there; keep the Cloudflare
+  // adapter for the existing local/Codex preview environment.
+  const isVercel = Boolean(process.env.VERCEL);
+  const deploymentPlugin = isVercel
+    ? (await import('nitro/vite')).nitro()
+    : await (async () => {
+        // Wrangler snapshots its log path while the Cloudflare plugin is imported.
+        const { cloudflare } = await import('@cloudflare/vite-plugin');
+        return cloudflare({
+          viteEnvironment: { name: 'rsc', childEnvironments: ['ssr'] },
+          config: localBindingConfig,
+        });
+      })();
 
   return {
-    css: { postcss: { plugins: [tailwindcss()] } },
     server: isCodexSeatbeltSandbox
       ? { watch: { useFsEvents: false, usePolling: true } }
       : undefined,
-    plugins: [
-      vinext(),
-      sites(),
-      cloudflare({
-        viteEnvironment: { name: 'rsc', childEnvironments: ['ssr'] },
-        config: localBindingConfig,
-      }),
-    ],
+    plugins: [vinext(), sites(), tailwindcss(), deploymentPlugin],
   };
 });
