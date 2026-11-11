@@ -29,7 +29,7 @@ export default function SiteHeader() {
           <a className="mega-menu-all" href="/coleccion">VER TODA LA COLECCIÓN <span>↗</span></a>
         </div>
       </details>
-      <a href="/recursos">RECURSOS</a><a href="/profesionales">A LA MEDIDA</a><a href="/manufactura#colaboraciones">COLABORACIONES</a><a href="/#estudio">NOSOTROS</a><a href="/coleccion">TIENDA</a>
+      <a href="/recursos">RECURSOS</a><a href="/profesionales">A LA MEDIDA</a><a href="/manufactura#colaboraciones">COLABORACIONES</a><a href="/#estudio">NOSOTROS</a><a href="/coleccion">TIENDA</a><CartIndicator />
     </nav>
     <a className="header-link desktop-contact" href="/#proyecto">CONTACTO ↗</a>
     <details className="mobile-nav">
@@ -40,8 +40,9 @@ export default function SiteHeader() {
       <div className="mobile-nav-panel">
         <div><p className="eyebrow">PRODUCTOS / POR ESPACIO</p>{spaces.map(item => <a key={item.id} href={`/#${item.id}`}>{item.label}<span>↗</span></a>)}</div>
         <div><p className="eyebrow">PRODUCTOS / POR TIPO</p>{families.map(item => <a key={item.id} href={`/coleccion#${item.id}`}>{item.label}<span>↗</span></a>)}</div>
-        <div className="mobile-nav-links"><a href="/recursos">RECURSOS</a><a href="/profesionales">A LA MEDIDA</a><a href="/manufactura#colaboraciones">COLABORACIONES / WORK WITH US</a><a href="/#estudio">NOSOTROS</a><a href="/coleccion">TIENDA</a><a href="/#proyecto">CONTACTO ↗</a></div>
+        <div className="mobile-nav-links"><a href="/recursos">RECURSOS</a><a href="/profesionales">A LA MEDIDA</a><a href="/manufactura#colaboraciones">COLABORACIONES / WORK WITH US</a><a href="/#estudio">NOSOTROS</a><a href="/coleccion">TIENDA</a><CartIndicator /><a href="/#proyecto">CONTACTO ↗</a></div>
       </div>
     </details>
   </header>;
 }
+import { CartIndicator } from './store/cart';
